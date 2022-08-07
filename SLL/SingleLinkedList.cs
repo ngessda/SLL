@@ -118,9 +118,9 @@ namespace SLL
                 Node current = new Node
                 {
                     Value = value,
-                    Next = GetNode(index).Next
+                    Next = GetNode(index)
                 };
-                GetNode(index - 1).Next = current.Next;
+                GetNode(index - 1).Next = current;
             }
         }
         public void RemoveAt(int index)
