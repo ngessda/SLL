@@ -1,0 +1,8 @@
+D:\C#\SLL\SLL\bin\Debug\SLL.exe.config
+D:\C#\SLL\SLL\bin\Debug\SLL.exe
+D:\C#\SLL\SLL\bin\Debug\SLL.pdb
+D:\C#\SLL\SLL\obj\Debug\SLL.csproj.AssemblyReference.cache
+D:\C#\SLL\SLL\obj\Debug\SLL.csproj.SuggestedBindingRedirects.cache
+D:\C#\SLL\SLL\obj\Debug\SLL.csproj.CoreCompileInputs.cache
+D:\C#\SLL\SLL\obj\Debug\SLL.exe
+D:\C#\SLL\SLL\obj\Debug\SLL.pdb
