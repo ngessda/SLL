@@ -115,96 +115,64 @@ namespace SLL
             }
             else
             {
+                if (index >= size || index < 0)
+                {
+                    Console.WriteLine("Заданный индекс больше или равен размеру списка");
+                    return;
+                }
                 Node current = new Node
                 {
                     Value = value,
                     Next = GetNode(index)
                 };
                 GetNode(index - 1).Next = current;
+                size++;
             }
         }
         public void RemoveAt(int index)
         {
-            Node current = head;
             if (head == null)
             {
                 Console.WriteLine("Корневой узел равен null");
                 return;
             }
-            if (index >= size || index < 0)
+            else
             {
-                Console.WriteLine("Заданный индекс больше или равен размеру списка");
-                return;
-            }
-            for (int i = 0; i < size; i++)
-            {
-                if(index == i)
+                if (index >= size || index < 0)
                 {
-                    for (int j = index; j < size; j++)
-                    {
-                        if (current.Next == null)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            current.Value = current.Next.Value;
-                            current = current.Next;
-                        }
-                    }
-                    size--;
-                    break;
+                    Console.WriteLine("Заданный индекс больше или равен размеру списка");
+                    return;
                 }
-                else
-                {
-                    current = current.Next;
-                }
+                GetNode(index - 1).Next = GetNode(index + 1);
+                size--;
             }
+
         }
         public void Switch(int firstIndex, int secondIndex)
         {
-            Node current = head;
-            int valueOne = 0;
-            int valueTwo = 0;
-            if (head == null)
             {
-                Console.WriteLine("Корневой узел равен null");
-                return;
+                if (head == null)
+                {
+                    Console.WriteLine("Корневой узел равен null");
+                    return;
+                }
+                if (firstIndex >= size || secondIndex >= size || firstIndex < 0 || secondIndex < 0)
+                {
+                    Console.WriteLine("Заданный индекс больше/меньше или равен размеру списка");
+                    return;
+                }
+                if (firstIndex == secondIndex)
+                {
+                    Console.WriteLine("Заданные индексы не могут быть равны");
+                }
             }
-            if (firstIndex >= size || secondIndex >= size || firstIndex < 0 || secondIndex < 0)
-            {
-                Console.WriteLine("Заданный индекс больше/меньше или равен размеру списка");
-                return;
-            }
-            for(int i = 0; i < size; i++)
-            {
-                if(firstIndex == i)
-                {
-                    valueOne = current.Value;
-                }
-                if(secondIndex == i)
-                {
-                    valueTwo = current.Value;
-                }
-                if (valueOne != 0 && valueTwo != 0)
-                {
-                    break;
-                }
-                current = current.Next;
-            }
-            current = head;
-            for (int i = 0; i < size; i++)
-            {
-                if (firstIndex == i)
-                {
-                    current.Value = valueTwo;
-                }
-                if (secondIndex == i)
-                {
-                    current.Value = valueOne;
-                }
-                current = current.Next;
-            }
+            Node node = GetNode(firstIndex);
+
+            GetNode(firstIndex - 1).Next = GetNode(secondIndex);
+            GetNode(firstIndex).Next = GetNode(firstIndex + 1);
+
+            GetNode(secondIndex - 1).Next = node;
+            GetNode(secondIndex).Next = GetNode(secondIndex + 1);
         }
     }
 }
