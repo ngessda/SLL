@@ -63,7 +63,7 @@ namespace SLL
 
         public void Add(int value)
         {
-            if (head == null)
+             if (head == null)
             {
                 head = new Node();
                 {
@@ -90,6 +90,22 @@ namespace SLL
             }
             size++;
         }
+        private Node GetNode(int index)
+        {
+            Node current = head;
+            for(int i =0; i < size; i++)
+            {
+                if(i == index)
+                {
+                    break;
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
+            return current;
+        }
         public void Insert(int index, int value)
         {
             if(head == null)
@@ -97,48 +113,14 @@ namespace SLL
                 Console.WriteLine("Корневой узел равен null");
                 return;
             }
-            if(index >= size || index < 0)
-            {
-                Console.WriteLine("Заданный индекс больше/меньше или равен размеру списка");
-                return;
-            }
             else
             {
-                Node current = head;
-                int flag = 0;
-                int flag1 = 0;
-                for(int i = 0; i < size; i++)
+                Node current = new Node
                 {
-                    if (index == i)
-                    {
-                        flag = current.Value;
-                        current.Value = value;
-                        size++;
-                        for (int j = index + 1; j < size; j++)
-                        {
-                            flag1 = current.Value;
-                            current.Value = flag;
-                            flag = flag1;
-                            if (current.Next == null)
-                            {
-                                current.Next = new Node();
-                                {
-                                    current.Next.Value = flag;
-                                }
-                                break;
-                            }
-                            else
-                            {
-                                current = current.Next;
-                            }
-                        }
-                        break;
-                    }
-                    else
-                    {
-                        current = current.Next;
-                    }
-                }
+                    Value = value,
+                    Next = GetNode(index).Next
+                };
+                GetNode(index - 1).Next = current.Next;
             }
         }
         public void RemoveAt(int index)
