@@ -77,10 +77,10 @@ namespace SLL
                 {
                     if(current.Next == null)
                     {
-                        current.Next = new Node();
+                        current.Next = new Node()
                         {
-                            current.Next.Value = value;
-                        }
+                            Value = value
+                        };
                     }
                     else
                     {
