@@ -143,6 +143,7 @@ namespace SLL
                     Console.WriteLine("Заданный индекс больше или равен размеру списка");
                     return;
                 }
+                GetNode(index).Next = null;
                 GetNode(index - 1).Next = GetNode(index + 1);
                 size--;
             }
