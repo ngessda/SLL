@@ -16,7 +16,9 @@ namespace SLL
             {
                 singleLinkedList.Add(rand.Next(0, 25));
             }
-            singleLinkedList.Insert(0, 0);
+            ShowList(singleLinkedList);
+            Console.WriteLine("//////////////////////////");
+            singleLinkedList.Switch(0, 4);
             ShowList(singleLinkedList);
             Console.ReadKey();
         }

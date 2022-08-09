@@ -165,15 +165,51 @@ namespace SLL
                 if (firstIndex == secondIndex)
                 {
                     Console.WriteLine("Заданные индексы не могут быть равны");
+                    return;
                 }
             }
-            Node node = GetNode(firstIndex);
+            Node counter;
+            if (firstIndex == 0)
+            {
+                counter = new Node()
+                {
+                    Value = head.Value,
+                    Next = GetNode(secondIndex + 1)
+                };
+                head = new Node()
+                {
+                    Value = GetNode(secondIndex).Value,
+                    Next = GetNode(firstIndex + 1)
+                };
+                GetNode(secondIndex - 1).Next = counter;
+            }
+            else if (secondIndex == 0)
+            {
+                counter = new Node()
+                {
+                    Value = head.Value,
+                    Next = GetNode(firstIndex + 1)
+                };
+                head = new Node()
+                {
+                    Value = GetNode(firstIndex).Value,
+                    Next = GetNode(secondIndex + 1)
+                };
+                GetNode(firstIndex - 1).Next = counter;
+            }
+            else
+            {
+                counter = new Node()
+                {
+                    Value = GetNode(firstIndex).Value,
+                    Next = GetNode(firstIndex).Next
+                };
+                GetNode(firstIndex - 1).Next = GetNode(secondIndex);
+                GetNode(secondIndex - 1).Next = counter;
 
-            GetNode(firstIndex - 1).Next = GetNode(secondIndex);
-            GetNode(firstIndex).Next = GetNode(firstIndex + 1);
-
-            GetNode(secondIndex - 1).Next = node;
-            GetNode(secondIndex).Next = GetNode(secondIndex + 1);
+                counter.Next = GetNode(secondIndex + 1);
+                GetNode(secondIndex).Next = GetNode(firstIndex + 1);
+            }
         }
     }
 }
