@@ -12,13 +12,13 @@ namespace SLL
         {
             Random rand = new Random();
             SingleLinkedList singleLinkedList = new SingleLinkedList();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 singleLinkedList.Add(rand.Next(0, 25));
             }
             ShowList(singleLinkedList);
             Console.WriteLine("//////////////////////////");
-            singleLinkedList.Switch(0, 4);
+            singleLinkedList.Switch(9, 0);
             ShowList(singleLinkedList);
             Console.ReadKey();
         }

@@ -140,34 +140,39 @@ namespace SLL
             {
                 if (index >= size || index < 0)
                 {
-                    Console.WriteLine("Заданный индекс больше или равен размеру списка");
-                    return;
+                    throw new IndexOutOfRangeException();
                 }
                 GetNode(index).Next = null;
-                GetNode(index - 1).Next = GetNode(index + 1);
+                if(index == size - 1)
+                {
+                    GetNode(index - 1).Next = null;
+                }
+                else
+                {
+                    GetNode(index - 1).Next = GetNode(index + 1);
+                }
                 size--;
             }
 
         }
         public void Switch(int firstIndex, int secondIndex)
         {
+            
+            if (head == null)
             {
-                if (head == null)
-                {
-                    Console.WriteLine("Корневой узел равен null");
-                    return;
-                }
-                if (firstIndex >= size || secondIndex >= size || firstIndex < 0 || secondIndex < 0)
-                {
-                    Console.WriteLine("Заданный индекс больше/меньше или равен размеру списка");
-                    return;
-                }
-                if (firstIndex == secondIndex)
-                {
-                    Console.WriteLine("Заданные индексы не могут быть равны");
-                    return;
-                }
+                Console.WriteLine("Корневой узел равен null");
+                return;
             }
+            if (firstIndex >= size || secondIndex >= size || firstIndex < 0 || secondIndex < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if (firstIndex == secondIndex)
+            {
+                Console.WriteLine("Заданные индексы не могут быть равны");
+                return;
+            }
+            
             Node counter;
             if (firstIndex == 0)
             {
@@ -196,6 +201,26 @@ namespace SLL
                     Next = GetNode(secondIndex + 1)
                 };
                 GetNode(firstIndex - 1).Next = counter;
+            }
+            else if(secondIndex == size - 1)
+            {
+                counter = new Node()
+                {
+                    Value = GetNode(secondIndex).Value,
+                };
+                GetNode(secondIndex - 1).Next = GetNode(firstIndex);
+                counter.Next = GetNode(firstIndex + 1);
+                GetNode(firstIndex - 1).Next = counter;
+            }
+            else if(firstIndex == size - 1)
+            {
+                counter = new Node()
+                {
+                    Value = GetNode(firstIndex).Value,
+                };
+                GetNode(firstIndex - 1).Next = GetNode(secondIndex);
+                counter.Next = GetNode(secondIndex + 1);
+                GetNode(secondIndex - 1).Next = counter;
             }
             else
             {
