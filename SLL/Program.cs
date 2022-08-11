@@ -18,7 +18,7 @@ namespace SLL
             }
             ShowList(singleLinkedList);
             Console.WriteLine("//////////////////////////");
-            singleLinkedList.Switch(9, 0);
+            singleLinkedList.Switch(0, 956);
             ShowList(singleLinkedList);
             Console.ReadKey();
         }

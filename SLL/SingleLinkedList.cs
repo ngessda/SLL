@@ -136,6 +136,10 @@ namespace SLL
                 Console.WriteLine("Корневой узел равен null");
                 return;
             }
+            if (size == 1)
+            {
+                head = null;
+            }
             else
             {
                 if (index >= size || index < 0)
@@ -147,6 +151,12 @@ namespace SLL
                 {
                     GetNode(index - 1).Next = null;
                 }
+                if (index == 0) // если индекс указывает на корневой узел
+                {
+                    Node next = GetNode(index + 1);
+                    head.Next = null;
+                    head = next;
+                }
                 else
                 {
                     GetNode(index - 1).Next = GetNode(index + 1);
@@ -157,83 +167,40 @@ namespace SLL
         }
         public void Switch(int firstIndex, int secondIndex)
         {
+            int first = firstIndex < secondIndex ? firstIndex : secondIndex;
+            int second = firstIndex < secondIndex ? secondIndex : firstIndex;
             
-            if (head == null)
+            if(first < second)
             {
-                Console.WriteLine("Корневой узел равен null");
-                return;
-            }
-            if (firstIndex >= size || secondIndex >= size || firstIndex < 0 || secondIndex < 0)
-            {
-                throw new IndexOutOfRangeException();
-            }
-            if (firstIndex == secondIndex)
-            {
-                Console.WriteLine("Заданные индексы не могут быть равны");
-                return;
-            }
-            
-            Node counter;
-            if (firstIndex == 0)
-            {
-                counter = new Node()
-                {
-                    Value = head.Value,
-                    Next = GetNode(secondIndex + 1)
-                };
-                head = new Node()
-                {
-                    Value = GetNode(secondIndex).Value,
-                    Next = GetNode(firstIndex + 1)
-                };
-                GetNode(secondIndex - 1).Next = counter;
-            }
-            else if (secondIndex == 0)
-            {
-                counter = new Node()
-                {
-                    Value = head.Value,
-                    Next = GetNode(firstIndex + 1)
-                };
-                head = new Node()
-                {
-                    Value = GetNode(firstIndex).Value,
-                    Next = GetNode(secondIndex + 1)
-                };
-                GetNode(firstIndex - 1).Next = counter;
-            }
-            else if(secondIndex == size - 1)
-            {
-                counter = new Node()
-                {
-                    Value = GetNode(secondIndex).Value,
-                };
-                GetNode(secondIndex - 1).Next = GetNode(firstIndex);
-                counter.Next = GetNode(firstIndex + 1);
-                GetNode(firstIndex - 1).Next = counter;
-            }
-            else if(firstIndex == size - 1)
-            {
-                counter = new Node()
-                {
-                    Value = GetNode(firstIndex).Value,
-                };
-                GetNode(firstIndex - 1).Next = GetNode(secondIndex);
-                counter.Next = GetNode(secondIndex + 1);
-                GetNode(secondIndex - 1).Next = counter;
-            }
-            else
-            {
-                counter = new Node()
-                {
-                    Value = GetNode(firstIndex).Value,
-                    Next = GetNode(firstIndex).Next
-                };
-                GetNode(firstIndex - 1).Next = GetNode(secondIndex);
-                GetNode(secondIndex - 1).Next = counter;
+                Node firstNode = GetNode(firstIndex);
+                Node secondNode = GetNode(secondIndex);
 
-                counter.Next = GetNode(secondIndex + 1);
-                GetNode(secondIndex).Next = GetNode(firstIndex + 1);
+                Node firstPrev = first - 1 >= 0 ? GetNode(first - 1) : null;
+                Node secondNext = second - 1 < size ? GetNode(second + 1) : null;
+
+                Node firstNext = GetNode(first + 1);
+                Node secondPrev = GetNode(second - 1);
+
+                if(firstPrev == null)
+                {
+                    head = secondNode;
+                }
+                else
+                {
+                    firstPrev.Next = secondNode;
+                }
+
+                if (first + 1 == second)
+                {
+                    firstNode = secondNext;
+                    secondNode = firstNode;
+                }
+                else
+                {
+                    secondPrev.Next = firstNode;
+                    firstNode.Next = secondNext;
+                    secondNode.Next = firstNext;
+                }
             }
         }
     }
