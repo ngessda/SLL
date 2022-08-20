@@ -117,8 +117,7 @@ namespace SLL
             {
                 if (index >= size || index < 0)
                 {
-                    Console.WriteLine("Заданный индекс больше или равен размеру списка");
-                    return;
+                    throw new IndexOutOfRangeException();
                 }
                 Node current = new Node
                 {
@@ -167,6 +166,10 @@ namespace SLL
         }
         public void Switch(int firstIndex, int secondIndex)
         {
+            if (firstIndex >= size || secondIndex >= size || firstIndex < 0 || secondIndex < 0) 
+            {
+                throw new IndexOutOfRangeException();
+            }
             int first = firstIndex < secondIndex ? firstIndex : secondIndex;
             int second = firstIndex < secondIndex ? secondIndex : firstIndex;
             
